@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+        {% block title %}Home{% endblock %}
+        {% block stylesheets %}
+           
+        {% endblock %}
+   
+    
+        {% block body %}
+            <div id="sidebar">
+                {% block sidebar %}
+                    <ul>
+                        
+                    </ul>
+                {% endblock %}
+            </div>
+
+            <div id="content">
+                {% block content %}
+                <div class="row my-5 " style="width: 80%; margin:auto;">
+                {% for message in app.flashes("success") %}
+                    <div class="alert alert-success">  
+                      {{ message }}
+                    </div>
+                {% endfor %}
+
+
+                {% if app.user %}
+            <div class="card">
+                <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Task</th>
+      <th scope="col">Description</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in user.tasks %}
+    
+  
+    <tr>
+      <th scope="row">{{task.id}}</th>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>{{task.user.username}}</td>
+       <td>
+      <a href="{{path('taskshow',{id:task.id})}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+       <a href="{{path('edit_task',{id:task.id})}}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+       <a href="{{path('delete_task',{id:task.id})}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+       
+       </td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  {% else %}
+
+  <h1>Log In </h1>
+{% endif %}
+</div>
+</div>
+{% endblock %}
+            </div>
+        {% endblock %}
+    

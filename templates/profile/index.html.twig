@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+        {% block title %}{{user.username}}{% endblock %}
+        {% block stylesheets %}
+           
+        {% endblock %}
+   
+    
+        {% block body %}
+
+        
+
+
+            <div id="sidebar">
+                {% block sidebar %}
+                    <ul>
+                        
+                    </ul>
+                {% endblock %}
+            </div>
+
+            <div id="content">
+                {% block content %}
+                <div class="row my-5 " style="width: 80%; margin:auto;">
+            <div class="card">
+                <div class="card">
+  <div class="card-header">
+    {{user.email}}
+  </div>
+  <div class="card-body">
+        {% if user.image == null %}
+    <img src="https://th.bing.com/th/id/R.62325205054ee42cbd441c7036a7e3ec?rik=zO5OmwzyqCJFHQ&riu=http%3a%2f%2fcdn.ebaumsworld.com%2fmediaFiles%2fpicture%2f1151541%2f84693449.png&ehk=vM0aW%2bAO3L3zjYVMYfQVJVnKYkhHNG5%2fcmOIIunjCFk%3d&risl=&pid=ImgRaw&r=0" alt="{{user.username}}" style="border-radius: 50%; width:10%;">
+
+      {% else %}
+
+<img src="{{ asset('/uploads/' ~ user.image) }}" alt="{{user.username}}" style="border-radius: 50%; width:10%;">
+      {% endif %}
+
+        <form action="{{ path('upload_image') }}" method="post" enctype="multipart/form-data">
+
+          <input type="file" name="image" id="image" class="form_control">
+          <button type="submit" class="btn btn-primary my-2"> Submit </button>
+        </form>
+    <a href="{{path('home')}}" class="btn btn-primary">Go Back</a>
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}
+            </div>
+        {% endblock %}
+    
